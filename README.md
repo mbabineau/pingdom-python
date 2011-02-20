@@ -1,6 +1,6 @@
 pingdom-python
 =====================
-Python library for [Pingdom](http://pingdom.com)'s new REST API
+Python library for [Pingdom](http://pingdom.com)'s new REST API (not yet public, see [post](http://royal.pingdom.com/2011/01/20/seeking-beta-testers-for-new-pingdom-api/))
 
 Currently, the library supports:
 

@@ -164,5 +164,6 @@ class PingdomConnection(object):
     
     
     def delete_check(self, check_id):
+        """Delete a Pingdom check by ID"""
         response = PingdomRequest(self, 'checks/%s' % check_id, method='DELETE').fetch()
         return response.content

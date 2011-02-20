@@ -59,7 +59,12 @@ Get more detailed information about a Pingdom check:
     ['__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'contactids', 'created', 'hostname', 'id', 'lasterrortime', 'lasttesttime', 'name', 'notifyagainevery', 'notifywhenbackup', 'resolution', 'sendnotificationwhendown', 'sendtoemail', 'sendtoiphone', 'sendtosms', 'sendtotwitter', 'status', 'type']
     >>> check.lasterrortime
     1289482981
-    
+
+Delete a Pingdom check:
+
+    >>> c.delete_check(302632)
+    {u'message': u'Deletion of check was successful!'}
+
 
 Contributing
 --------------------

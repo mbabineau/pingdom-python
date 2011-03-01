@@ -1,12 +1,12 @@
 pingdom-python
 =====================
-Python library for [Pingdom](http://pingdom.com)'s new REST API (not yet public, see [post](http://royal.pingdom.com/2011/01/20/seeking-beta-testers-for-new-pingdom-api/))
+3rd-party Python library for [Pingdom](http://pingdom.com)'s new REST API.  Note that this API is still in beta, so may change at any time.  Additionally, it has not yet been released publicly; for access, you'll need to contact Pingdom (see blog [post](http://royal.pingdom.com/2011/01/20/seeking-beta-testers-for-new-pingdom-api/)).
 
 Currently, the library supports:
 
 * Checks (create, delete, get, list)
 
-Love writing code?  [EA2D](http://ea2d.com) is [hiring](http://ea2d.com/jobs/)!
+Love writing code? [EA2D](http://ea2d.com) is [hiring](http://ea2d.com/jobs/)!
 
 
 Requirements

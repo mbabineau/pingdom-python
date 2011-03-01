@@ -26,7 +26,7 @@ import pingdom
 setup(name = 'pingdom',
       version = pingdom.__version__,
       description = 'Pingdom Library',
-      long_description='Python interface to Pingdom.',
+      long_description='3rd-party Python interface to Pingdom\'s new REST API. Note that this API is still in private beta. See README.md for details',
       author = 'Mike Babineau',
       author_email = 'michael.babineau@gmail.com',
       install_requires = ['simplejson'],

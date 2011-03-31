@@ -25,6 +25,7 @@ import urllib2
 import simplejson
 
 from pingdom.resources import PingdomCheck
+from pingdom.resources import PingdomContact
 from pingdom.exception import PingdomError
 
 
@@ -171,3 +172,11 @@ class PingdomConnection(object):
         """Delete a Pingdom check by ID"""
         response = PingdomRequest(self, 'checks/%s' % check_id, method='DELETE').fetch()
         return response.content
+
+    def get_all_contacts(self):
+        """Get a list of Pingdom contacts"""
+        response = PingdomRequest(self, 'contacts').fetch()
+        result = response.content
+
+        contacts = [PingdomContact(r) for r in result['contacts']]
+        return contacts

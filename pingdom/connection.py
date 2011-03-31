@@ -64,6 +64,9 @@ class PingdomRequest(urllib2.Request):
         # Add auth header
         base64string = base64.encodestring('%s:%s' % (connection.username, connection.password)).replace('\n','')
         self.add_header("Authorization", "Basic %s" % base64string)
+
+        if connection.apikey:
+            self.add_header("App-Key", connection.apikey)
         
         # Enable gzip
         if enable_gzip:
@@ -106,11 +109,12 @@ class PingdomResponse(object):
         
         
 class PingdomConnection(object):
-    def __init__(self, username, password, base_url='https://api.pingdom.com/api/2.0'):
+    def __init__(self, username, password, apikey = '', base_url='https://api.pingdom.com/api/2.0'):
         """Interface to the Pingdom API."""
         
         self.username = username
         self.password = password
+        self.apikey = apikey
         self.base_url = base_url
     
     

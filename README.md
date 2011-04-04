@@ -72,8 +72,9 @@ Use GitHub's standard fork/commit/pull-request cycle.  If you have any questions
 
 Contributors
 --------------------
-A shout out to:
-* David King ([ketralnis](https://github.com/ketralnis)) for cef9f7ad69cdda787a2ec0d8b7034066fb5a8eda and f03548a84a297cf2728c7c7c6fda94ad4bb81992
+Awesome people who have fixed bugs, added features, or otherwise improved the project:
+
+* David King ([ketralnis](https://github.com/ketralnis))
 
 
 License

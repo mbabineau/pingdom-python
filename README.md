@@ -1,6 +1,6 @@
 pingdom-python
 =====================
-3rd-party Python library for [Pingdom](http://pingdom.com)'s new REST API.  Note that this API is still in beta, so may change at any time.  Additionally, it has not yet been released publicly; for access, you'll need to contact Pingdom (see blog [post](http://royal.pingdom.com/2011/01/20/seeking-beta-testers-for-new-pingdom-api/)).
+3rd-party Python library for [Pingdom](http://pingdom.com)'s new REST API.  Note that this API is still in beta, so may change at any time.  For more information about the API, see Pingdom's blog [post](http://royal.pingdom.com/2011/03/22/new-pingdom-api-enters-public-beta/).
 
 Currently, the library supports:
 
@@ -69,6 +69,11 @@ Delete a Pingdom check:
 Contributing
 --------------------
 Use GitHub's standard fork/commit/pull-request cycle.  If you have any questions, email <ops@ea2d.com>.
+
+Contributors
+--------------------
+A shout out to:
+* David King ([ketralnis](https://github.com/ketralnis)) for cef9f7ad69cdda787a2ec0d8b7034066fb5a8eda and f03548a84a297cf2728c7c7c6fda94ad4bb81992
 
 
 License

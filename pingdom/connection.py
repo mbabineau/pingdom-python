@@ -22,7 +22,10 @@ import sys
 import urllib
 import urllib2
 
-import simplejson
+try:
+    import json as simplejson
+except:
+    import simplejson
 
 from pingdom.resources import PingdomCheck
 from pingdom.resources import PingdomContact
@@ -151,7 +154,7 @@ class PingdomConnection(object):
         pingdom_check = PingdomCheck(response.content['check'])
         return pingdom_check
 
-    
+
     def create_check(self, name, host, check_type, **kwargs):
         """Create a Pingdom check"""
         post_data = {'name': name,
@@ -159,13 +162,27 @@ class PingdomConnection(object):
                      'type': check_type}
         for key in kwargs:
             post_data[key] = kwargs[key]
-        
+
         try:
             response = PingdomRequest(self, 'checks', post_data=post_data).fetch()
         except PingdomError, e:
             logging.error(e)
         else:
             return PingdomCheck(response.content['check'])
+
+
+    def modify_check(self, check_id, paused = False, **kwargs):
+        """Create a Pingdom check"""
+        post_data = {'paused': paused}
+        for key in kwargs:
+            post_data[key] = kwargs[key]
+
+        try:
+            response = PingdomRequest(self, 'checks/%s' % check_id, post_data=post_data, method='PUT').fetch()
+        except PingdomError, e:
+            logging.error(e)
+        else:
+            return response.content['message']
     
     
     def delete_check(self, check_id):

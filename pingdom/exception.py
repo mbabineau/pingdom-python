@@ -14,7 +14,10 @@
 # limitations under the License.
 
 import gzip
-import simplejson
+try:
+    import json as simplejson
+except:
+    import simplejson
 import StringIO
 import urllib2
 

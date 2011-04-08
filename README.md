@@ -12,7 +12,7 @@ Love writing code? [EA2D](http://ea2d.com) is [hiring](http://ea2d.com/jobs/)!
 Requirements
 --------------------
 - Pingdom account
-- simplejson Python module
+- simplejson (Python 2.5 and earlier)
 
 
 Installation

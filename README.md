@@ -60,6 +60,14 @@ Get more detailed information about a Pingdom check:
     >>> check.lasterrortime
     1289482981
 
+Modify a Pingdom check:
+
+    >>> c.modify_check(210702, paused=True)  # Pause the check
+    u'Modification of check was successful!'
+    >>> check = c.get_check(210702)
+    >>> check.status
+    u'paused'
+
 Delete a Pingdom check:
 
     >>> c.delete_check(302632)
@@ -75,6 +83,7 @@ Contributors
 Awesome people who have fixed bugs, added features, or otherwise improved the project:
 
 * David King ([ketralnis](https://github.com/ketralnis))
+* John Walsh ([walsh159](https://github.com/walsh159))
 
 
 License

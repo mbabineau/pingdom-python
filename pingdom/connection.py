@@ -23,9 +23,9 @@ import urllib
 import urllib2
 
 try:
-    import json as simplejson
+    import json
 except:
-    import simplejson
+    import simplejson as json
 
 from pingdom.resources import PingdomCheck
 from pingdom.resources import PingdomContact
@@ -101,7 +101,7 @@ class PingdomResponse(object):
             self.data = response.read()
 
         self.headers = response.headers
-        self.content = simplejson.loads(self.data)
+        self.content = json.loads(self.data)
         
         if 'error' in self.content:
             raise PingdomError(self.content)
@@ -171,9 +171,9 @@ class PingdomConnection(object):
             return PingdomCheck(response.content['check'])
 
 
-    def modify_check(self, check_id, paused = False, **kwargs):
-        """Create a Pingdom check"""
-        post_data = {'paused': paused}
+    def modify_check(self, check_id, **kwargs):
+        """Modify a Pingdom check by ID"""
+        post_data = {}
         for key in kwargs:
             post_data[key] = kwargs[key]
 
@@ -189,6 +189,7 @@ class PingdomConnection(object):
         """Delete a Pingdom check by ID"""
         response = PingdomRequest(self, 'checks/%s' % check_id, method='DELETE').fetch()
         return response.content
+
 
     def get_all_contacts(self):
         """Get a list of Pingdom contacts"""

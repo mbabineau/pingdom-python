@@ -1,4 +1,4 @@
-#!/usr/scripts/env python
+#!/usr/bin/python
 
 # Copyright 2011 Electronic Arts Inc.
 # 

@@ -31,7 +31,7 @@ Library Usage
 Set up a Pingdom connection:
     
     >>> import pingdom
-    >>> c = pingdom.PingdomConnection(PINGDOM_USERNAME, PINGDOM_PASSWORD)  # Same credentials you use for the Pingdom website
+    >>> c = pingdom.PingdomConnection(PINGDOM_USERNAME, PINGDOM_PASSWORD, API_KEY)  # Same credentials you use for the Pingdom website
         
 Create a new Pingdom check:
 

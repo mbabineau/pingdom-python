@@ -60,6 +60,12 @@ Get more detailed information about a Pingdom check:
     >>> check.lasterrortime
     1289482981
 
+Get the raw results for the last 5 checks by check ID:
+
+    >>> raw_results = conn.get_raw_check_results('210702','5')
+    >>> results
+        [{u'status': u'up', u'statusdesclong': u'OK', u'probeid': 46, u'responsetime': 944, u'time': 1310662461, u'statusdesc': u'OK'}, {u'status': u'up', u'statusdesclong': u'OK', u'probeid': 53, u'responsetime': 3509, u'time': 1310662401, u'statusdesc': u'OK'}, {u'status': u'up', u'statusdesclong': u'OK', u'probeid': 47, u'responsetime': 757, u'time': 1310662341, u'statusdesc': u'OK'}, {u'status': u'up', u'statusdesclong': u'OK', u'probeid': 48, u'responsetime': 484, u'time': 1310662281, u'statusdesc': u'OK'}, {u'status': u'up', u'statusdesclong': u'OK', u'probeid': 49, u'responsetime': 755, u'time': 1310662221, u'statusdesc': u'OK'}]
+
 Modify a Pingdom check:
 
     >>> c.modify_check(210702, paused=True)  # Pause the check

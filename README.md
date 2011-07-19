@@ -62,9 +62,16 @@ Get more detailed information about a Pingdom check:
 
 Get the raw results for the last 5 checks by check ID:
 
-    >>> raw_results = conn.get_raw_check_results('210702','5')
-    >>> results
-        [{u'status': u'up', u'statusdesclong': u'OK', u'probeid': 46, u'responsetime': 944, u'time': 1310662461, u'statusdesc': u'OK'}, {u'status': u'up', u'statusdesclong': u'OK', u'probeid': 53, u'responsetime': 3509, u'time': 1310662401, u'statusdesc': u'OK'}, {u'status': u'up', u'statusdesclong': u'OK', u'probeid': 47, u'responsetime': 757, u'time': 1310662341, u'statusdesc': u'OK'}, {u'status': u'up', u'statusdesclong': u'OK', u'probeid': 48, u'responsetime': 484, u'time': 1310662281, u'statusdesc': u'OK'}, {u'status': u'up', u'statusdesclong': u'OK', u'probeid': 49, u'responsetime': 755, u'time': 1310662221, u'statusdesc': u'OK'}]
+    >>> raw_results = c.get_raw_check_results(check.id, 5)
+    >>> for r in raw_results:
+    ...     print r
+    ... 
+    {u'status': u'up', u'statusdesclong': u'OK', u'probeid': 43, u'responsetime': 344, u'time': 1311110541, u'statusdesc': u'OK'}
+    {u'status': u'up', u'statusdesclong': u'OK', u'probeid': 44, u'responsetime': 437, u'time': 1311110482, u'statusdesc': u'OK'}
+    {u'status': u'up', u'statusdesclong': u'OK', u'probeid': 46, u'responsetime': 599, u'time': 1311110421, u'statusdesc': u'OK'}
+    {u'status': u'up', u'statusdesclong': u'OK', u'probeid': 53, u'responsetime': 775, u'time': 1311110361, u'statusdesc': u'OK'}
+    {u'status': u'up', u'statusdesclong': u'OK', u'probeid': 47, u'responsetime': 765, u'time': 1311110301, u'statusdesc': u'OK'}
+
 
 Modify a Pingdom check:
 
@@ -90,6 +97,7 @@ Awesome people who have fixed bugs, added features, or otherwise improved the pr
 
 * David King ([ketralnis](https://github.com/ketralnis))
 * John Walsh ([walsh159](https://github.com/walsh159))
+* Musannif Zahir ([mzahir](https://github.com/mzahir))
 
 
 License

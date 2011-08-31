@@ -155,9 +155,9 @@ class PingdomConnection(object):
         return pingdom_check
 
     
-    def get_raw_check_results(self, check_id, limit):
+    def get_raw_check_results(self, check_id, from_time=0, limit=100):
         """Get raw check results for a specific Pingdom check by ID and limit"""
-        response = PingdomRequest(self, 'results/%s?limit=%s' %(check_id,limit)).fetch()
+        response = PingdomRequest(self, 'results/%s?from=%s&limit=%s' %(check_id, from_time, limit)).fetch()
         return response.content['results']
 
     def create_check(self, name, host, check_type, **kwargs):

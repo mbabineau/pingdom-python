@@ -203,3 +203,8 @@ class PingdomConnection(object):
 
         contacts = [PingdomContact(r) for r in result['contacts']]
         return contacts
+        
+    def get_actions(self, limit):
+        """Get a list of Pingdom actions/alerts"""
+        response = PingdomRequest(self, 'actions/?limit=%s' % limit).fetch()
+        return response.content

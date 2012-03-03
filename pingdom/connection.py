@@ -203,3 +203,10 @@ class PingdomConnection(object):
 
         contacts = [PingdomContact(r) for r in result['contacts']]
         return contacts
+    
+    def get_summary_average(self, check_id, from_time=0, to_time=0, include_uptime='true'):
+        """Get a summarized response time / uptime value for a specified check and time period."""
+        response = PingdomRequest(self, 'summary.average/%s?from=%s&to=%s&includeuptime=%s' %(check_id, from_time, to_time, include_uptime)).fetch()
+        return response.content['summary']
+    
+   

@@ -22,8 +22,8 @@ from pingdom.resources import PingdomCheck
 from pingdom.resources import PingdomContact
 from pingdom.exception import PingdomError
 
-BASE_URL='https://api.pingdom.com/api/'
-BASE_VERSION='2.0'
+BASE_URL = 'https://api.pingdom.com/api/'
+BASE_VERSION = '2.0'
 log = logging.getLogger(__name__)
 
 
@@ -66,9 +66,9 @@ class PingdomRequest(object):
         """
         self.url = connection.base_url + '/' + resource
         self.post_data = post_data
-        self.method = self._method( method, post_data )
+        self.method = self._method(method, post_data)
         self.auth = HTTPBasicAuth(connection.username, connection.password)
-        self.headers = { 'App-Key': connection.apikey }
+        self.headers = {'App-Key': connection.apikey}
 
         # TODO ensure this still works
 #        # Enable gzip
@@ -82,7 +82,7 @@ class PingdomRequest(object):
     def fetch(self):
         """Execute the request."""
         try:
-            msg = "`url`={0!r}\n`data`={1!r}".format( self.url, self.post_data)
+            msg = "`url`={0!r}\n`data`={1!r}".format(self.url, self.post_data)
             log.debug(msg)
             response = getattr(requests, self.method)(url=self.url,
                 data=self.post_data, auth=self.auth, headers=self.headers)
@@ -98,7 +98,7 @@ class PingdomResponse(object):
         self.headers = response.headers
         self.content = json.loads(response.content)
 
-        if response.status_code >=300:
+        if response.status_code >= 300:
             raise PingdomError(response)
 
     def __repr__(self):
@@ -127,8 +127,8 @@ class PingdomConnection(object):
     def get_all_checks(self, check_names=None, check_excludes=None):
         """Get a list of Pingdom checks, optionally filtered by check name"""
         if check_excludes is None:
-            check_excludes=[]
-            
+            check_excludes = []
+
         response = PingdomRequest(self, 'checks').fetch()
         result = response.content
 

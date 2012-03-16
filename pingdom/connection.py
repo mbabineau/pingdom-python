@@ -137,9 +137,8 @@ class PingdomConnection(object):
         else:
             pingdom_checks += [PingdomCheck(r) for r in result['checks']]
 
-        if check_excludes:
-            for check_exclude in check_excludes:
-                del pingdom_checks[check_exclude]
+        for check_exclude in check_excludes:
+            pingdom_checks.remove(check_exclude)
 
         return pingdom_checks
 

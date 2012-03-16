@@ -124,7 +124,7 @@ class PingdomConnection(object):
         check_list = [i.name for i in pingdom_checks]
         return check_list
 
-    def get_all_checks(self, check_names=None):
+    def get_all_checks(self, check_names=None, check_excludes=None):
         """Get a list of Pingdom checks, optionally filtered by check name"""
         response = PingdomRequest(self, 'checks').fetch()
         result = response.content
@@ -136,6 +136,10 @@ class PingdomConnection(object):
                                    if r['name'] == check_name]
         else:
             pingdom_checks += [PingdomCheck(r) for r in result['checks']]
+
+        if check_excludes:
+            for check_exclude in check_excludes:
+                del pingdom_checks[check_exclude]
 
         return pingdom_checks
 

@@ -16,8 +16,6 @@ try:
 except ImportError:
     from distutils.core import setup
 
-import sys
-
 import pingdom
 
 setup(name='pingdom',
@@ -28,7 +26,7 @@ setup(name='pingdom',
         details""",
       author='Mike Babineau',
       author_email='michael.babineau@gmail.com',
-      install_requires=['simplejson'],
+      install_requires=['simplejson', 'requests'],
       url='http://github.com/EA2D/pingdom-python',
       packages=['pingdom'],
       license='Apache v2.0',

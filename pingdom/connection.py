@@ -9,24 +9,39 @@
 
 """
 
-import base64
-import gzip
 import logging
-import StringIO
-import urllib
-import urllib2
 
 try:
     import json
 except:
     import simplejson as json
+import requests
+from requests.auth import HTTPBasicAuth
 
 from pingdom.resources import PingdomCheck
 from pingdom.resources import PingdomContact
 from pingdom.exception import PingdomError
 
+BASE_URL='https://api.pingdom.com/api/'
+BASE_VERSION='2.0'
+log = logging.getLogger(__name__)
 
-class PingdomRequest(urllib2.Request):
+
+class PingdomRequest(object):
+
+    def _method(self, method, post_data):
+        """ Returns a method used on Request
+
+            defaults to `post` if post_data, `get` otherwise
+        """
+        if post_data:
+            if not method:
+                method = 'post'
+        else:
+            if not method:
+                method = 'get'
+        return method.lower()
+
     def __init__(self, connection, resource, post_data=None, method=None,
                  enable_gzip=True):
         """Representation of a Pingdom API HTTP request.
@@ -49,63 +64,42 @@ class PingdomRequest(urllib2.Request):
         :param enable_gzip: Whether or not to gzip the request (thus telling
             Pingdom to gzip the response)
         """
-        url = connection.base_url + '/' + resource
+        self.url = connection.base_url + '/' + resource
+        self.post_data = post_data
+        self.method = self._method( method, post_data )
+        self.auth = HTTPBasicAuth(connection.username, connection.password)
+        self.headers = { 'App-Key': connection.apikey }
 
-        if post_data:
-            if not method:
-                method = 'POST'
-            data = urllib.urlencode(post_data)
-            urllib2.Request.__init__(self, url, data)
-        else:
-            if not method:
-                method = 'GET'
-            urllib2.Request.__init__(self, url)
-
-        # Trick to support DELETE, PUT, etc.
-        if method not in ['GET', 'POST']:
-            self.get_method = lambda: '%s' % method
-
-        # Add auth header
-        auth_string = '%s:%s' % (connection.username, connection.password)
-        base64string = base64.encodestring(auth_string.replace('\n', ''))
-
-        self.add_header("Authorization", "Basic %s" % base64string)
-
-        if connection.apikey:
-            self.add_header("App-Key", connection.apikey)
-
-        # Enable gzip
-        if enable_gzip:
-            self.add_header('Accept-Encoding', 'gzip')
+        # TODO ensure this still works
+#        # Enable gzip
+#        if enable_gzip:
+#            self.add_header('Accept-Encoding', 'gzip')
 
     def __repr__(self):
-        return 'PingdomRequest: %s %s' % (self.get_method(),
-                                          self.get_full_url())
+        return 'PingdomRequest:\n\t{0!r}\n\t{1!r}\n\t{2!r}' % \
+               (self.url, self.method, self.auth)
 
     def fetch(self):
         """Execute the request."""
         try:
-            response = urllib2.urlopen(self)
-        except urllib2.HTTPError, e:
+            msg = "`url`={0!r}\n`data`={1!r}".format( self.url, self.post_data)
+            log.debug(msg)
+            response = getattr(requests, self.method)(url=self.url,
+                data=self.post_data, auth=self.auth, headers=self.headers)
+        except requests.exceptions.RequestException, e:
             raise PingdomError(e)
-        else:
-            return PingdomResponse(response)
+        return PingdomResponse(response)
 
 
 class PingdomResponse(object):
     def __init__(self, response):
         """Representation of a Pingdom API HTTP response."""
-        if response.headers.get('content-encoding') == 'gzip':
-            self.data = gzip.GzipFile(
-                fileobj=StringIO.StringIO(response.read())).read()
-        else:
-            self.data = response.read()
 
         self.headers = response.headers
-        self.content = json.loads(self.data)
+        self.content = json.loads(response.content)
 
-        if 'error' in self.content:
-            raise PingdomError(self.content)
+        if response.status_code >=300:
+            raise PingdomError(response)
 
     def __repr__(self):
         return 'PingdomResponse: %s' % self.content.keys()
@@ -113,7 +107,7 @@ class PingdomResponse(object):
 
 class PingdomConnection(object):
     def __init__(self, username, password, apikey='',
-                 base_url='https://api.pingdom.com/api/2.0'):
+                 base_url=BASE_URL + BASE_VERSION):
         """Interface to the Pingdom API."""
 
         self.username = username

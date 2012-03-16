@@ -8,37 +8,30 @@
     License has been consolidated to LICENSE file in root.
 
 """
-
-import gzip
-import StringIO
-import urllib2
+from urllib2 import HTTPError
 
 try:
-    import json as simplejson
+    import json
 except:
-    import simplejson
+    import simplejson as json
 
+import logging
+log = logging.getLogger(__name__)
 
-class PingdomError(urllib2.HTTPError):
-    def __init__(self, http_error):
-        urllib2.HTTPError.__init__(self, http_error.filename, http_error.code,
-            http_error.msg, http_error.hdrs, http_error.fp)
+class PingdomError(Exception):
 
-        if self.headers.get('content-encoding') == 'gzip':
-            data = gzip.GzipFile(
-                fileobj=StringIO.StringIO(http_error.read())).read()
-        else:
-            data = self.read()
-
-        j = simplejson.loads(data)
-        error = j['error']
-        self.statuscode = error['statuscode']
-        self.statusdesc = error['statusdesc']
-        self.errormessage = error['errormessage']
+    def __init__(self, http_response):
+        """
+        """
+        content = json.loads(http_response.content)
+        self.status_code = http_response.status_code
+        self.status_desc = content['error']['statusdesc']
+        self.error_message  = content['error']['errormessage']
+        super(PingdomError, self).__init__(self.__str__() )
 
     def __repr__(self):
-        return 'PingdomError: HTTP %s %s returned with message, "%s"' % \
-               (self.statuscode, self.statusdesc, self.errormessage)
+        return 'PingdomError: HTTP `%s - %s` returned with message, "%s"' % \
+               (self.status_code, self.status_desc, self.error_message)
 
     def __str__(self):
         return self.__repr__()

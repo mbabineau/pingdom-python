@@ -126,6 +126,9 @@ class PingdomConnection(object):
 
     def get_all_checks(self, check_names=None, check_excludes=None):
         """Get a list of Pingdom checks, optionally filtered by check name"""
+        if check_excludes is None:
+            check_excludes=[]
+            
         response = PingdomRequest(self, 'checks').fetch()
         result = response.content
 

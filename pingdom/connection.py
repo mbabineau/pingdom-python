@@ -10,11 +10,9 @@
 """
 
 import base64
-import datetime
 import gzip
 import logging
 import StringIO
-import sys
 import urllib
 import urllib2
 

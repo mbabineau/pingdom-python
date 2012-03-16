@@ -12,6 +12,7 @@ develop-eggs
 .installed.cfg
 .pyc
 .idea
+_build
 
 # Installer logs
 pip-log.txt

@@ -18,6 +18,9 @@ class PingdomCheck(object):
     def __repr__(self):
         return "Check:%s" % self.name
 
+    def __eq__(self, other):
+        return self.id == other.id
+
 
 class PingdomContact(object):
     def __init__(self, attributes):

@@ -9,7 +9,7 @@
 
 """
 
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 __author__ = 'Mike Babineau <mikeb@ea2d.com>'
 __copyright__ = "Copyright 2011 Electronic Arts Inc."

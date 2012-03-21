@@ -18,12 +18,11 @@ except ImportError:
 
 import pingdom
 
-setup(name='pingdom',
+setup(name='pingdom-python',
       version=pingdom.__version__,
       description='Pingdom Library',
       long_description="""3rd-party Python interface to Pingdom's new REST
-        API. Note that this API is still in beta. See README.rst for
-        details""",
+        API.""",
       author='Mike Babineau',
       author_email='michael.babineau@gmail.com',
       install_requires=['simplejson', 'requests'],

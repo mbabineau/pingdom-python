@@ -9,8 +9,6 @@
 
 """
 
-__version__ = '0.2.1'
-
 __author__ = 'Mike Babineau <mikeb@ea2d.com>'
 __copyright__ = "Copyright 2011 Electronic Arts Inc."
 __license__ = "Apache v2.0"

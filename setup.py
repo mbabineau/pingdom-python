@@ -1,32 +1,15 @@
-# -*- coding: utf-8 -*-
-"""
 
-    setup
-    ~~~~~~~~
-
-    John Costa, 3/16/2012
-    License has been consolidated to LICENSE file in root.
-
-    Setup file used for project installation
-
-"""
-
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
-
-import pingdom
+from setuptools import setup
 
 setup(name='pingdom-python',
-      version=pingdom.__version__,
+      version="0.2.1",
       description='Pingdom Library',
       long_description="""3rd-party Python interface to Pingdom's new REST
         API.""",
-      author='Mike Babineau',
-      author_email='michael.babineau@gmail.com',
-      install_requires=['simplejson', 'requests'],
-      url='http://github.com/EA2D/pingdom-python',
+      author='John Costa',
+      author_email='john.costa@gmail.com',
+      install_requires=[ 'requests>=0.10.8', 'simplejson'],
+      url='https://github.com/johncosta/pingdom-python',
       packages=['pingdom'],
       license='Apache v2.0',
       platforms='Posix; MacOS X; Windows',
@@ -35,5 +18,5 @@ setup(name='pingdom-python',
                    'Intended Audience :: System Administrators',
                    'License :: OSI Approved :: Apache Software License',
                    'Operating System :: OS Independent',
-                   'Topic :: System :: Monitoring', ]
+                   'Topic :: System :: Monitoring', ],
       )

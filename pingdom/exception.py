@@ -2,10 +2,6 @@
 """
 
     pingdom.exception
-    ~~~~~~~~
-
-    John Costa, 3/16/2012
-    License has been consolidated to LICENSE file in root.
 
 """
 from urllib2 import HTTPError

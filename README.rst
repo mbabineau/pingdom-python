@@ -1,11 +1,6 @@
 ==============
 pingdom-python
 ==============
-
-Special Note 3/16/2011: I have an email out to the original author about
- a pull request back to the original trunk. I'd like to see these changes
- pulled into the original for pypi consideration.
-
 3rd-party Python library for Pingdom_.'s new REST API.
 Note that this API is still in beta, so may change at any time.  For more
 information about the API, see Pingdom's blog post_.

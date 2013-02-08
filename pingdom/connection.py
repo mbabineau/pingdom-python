@@ -2,10 +2,6 @@
 """
 
     pingdom.connection
-    ~~~~~~~~
-
-    John Costa, 3/16/2012
-    License has been consolidated to LICENSE file in root.
 
 """
 

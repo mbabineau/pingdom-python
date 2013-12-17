@@ -14,8 +14,7 @@ Requirements
 ============
 
 - Pingdom account
-- simplejson (Python 2.5 and earlier)
-- requests
+- requests (0.10.8 or newer)
 
 =============
 Documentation

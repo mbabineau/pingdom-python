@@ -4,7 +4,10 @@
     pingdom.exception
 
 """
-from urllib2 import HTTPError
+try:
+    from urllib2 import HTTPError
+except:
+    from urllib.error import HTTPError
 
 try:
     import json

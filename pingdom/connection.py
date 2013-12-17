@@ -6,11 +6,6 @@
 """
 
 import logging
-
-try:
-    import json
-except:
-    import simplejson as json
 import requests
 from requests.auth import HTTPBasicAuth
 
@@ -92,7 +87,7 @@ class PingdomResponse(object):
         """Representation of a Pingdom API HTTP response."""
 
         self.headers = response.headers
-        self.content = json.loads(response.content)
+        self.content = response.json()
 
         if response.status_code >= 300:
             raise PingdomError(response)

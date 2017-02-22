@@ -39,7 +39,9 @@ class PingdomRequest(object):
 
         :type connection: :class:`PingdomConnection`
         :param connection: Pingdom connection object populated with a username,
-            password and base URL
+            password and base URL.
+            Additional email can be provided for multi user authentication:
+            https://www.pingdom.com/resources/api#multi-user+authentication
 
         :type resource: string
         :param resource: Pingdom resource to query (in all lowercase)
@@ -60,6 +62,8 @@ class PingdomRequest(object):
         self.method = self._method(method, post_data)
         self.auth = HTTPBasicAuth(connection.username, connection.password)
         self.headers = {'App-Key': connection.apikey}
+        if connection.email:
+            self.headers['Account-Email'] = connection.email
 
         # TODO ensure this still works
 #        # Enable gzip
@@ -98,13 +102,14 @@ class PingdomResponse(object):
 
 class PingdomConnection(object):
     def __init__(self, username, password, apikey='',
-                 base_url=BASE_URL + BASE_VERSION):
+                 base_url=BASE_URL + BASE_VERSION, email=''):
         """Interface to the Pingdom API."""
 
         self.username = username
         self.password = password
         self.apikey = apikey
         self.base_url = base_url
+        self.email = email
 
     def __repr__(self):
         return "Connection:%s" % self.base_url
@@ -198,7 +203,7 @@ class PingdomConnection(object):
            (check_id, from_time, to_time, include_uptime)
         response = PingdomRequest(self, rs).fetch()
         return response.content['summary']
-        
+
     def get_actions(self, limit):
         """Get a list of Pingdom actions/alerts"""
         response = PingdomRequest(self, 'actions/?limit=%s' % limit).fetch()

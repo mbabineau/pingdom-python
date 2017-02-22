@@ -102,13 +102,14 @@ class PingdomResponse(object):
 
 class PingdomConnection(object):
     def __init__(self, username, password, apikey='',
-                 base_url=BASE_URL + BASE_VERSION):
+                 base_url=BASE_URL + BASE_VERSION, email=''):
         """Interface to the Pingdom API."""
 
         self.username = username
         self.password = password
         self.apikey = apikey
         self.base_url = base_url
+        self.email = email
 
     def __repr__(self):
         return "Connection:%s" % self.base_url

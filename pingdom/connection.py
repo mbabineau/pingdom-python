@@ -62,8 +62,8 @@ class PingdomRequest(object):
         self.method = self._method(method, post_data)
         self.auth = HTTPBasicAuth(connection.username, connection.password)
         self.headers = {'App-Key': connection.apikey}
-        if 'email' in connection:
-            self.headers['Account-Email'] = connection['email']
+        if connection.email:
+            self.headers['Account-Email'] = connection.email
 
         # TODO ensure this still works
 #        # Enable gzip

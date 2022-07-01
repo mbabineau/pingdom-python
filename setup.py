@@ -2,10 +2,6 @@
 import sys
 from setuptools import setup
 
-extra = {}
-if sys.version_info >= (3,):
-    extra['use_2to3'] = True
-
 setup(name='pingdom',
       version="0.2.1",
       description='Pingdom Library',
@@ -23,5 +19,4 @@ setup(name='pingdom',
                    'License :: OSI Approved :: Apache Software License',
                    'Operating System :: OS Independent',
                    'Topic :: System :: Monitoring', ],
-      **extra
       )

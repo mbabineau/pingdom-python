@@ -77,7 +77,7 @@ class PingdomRequest(object):
             log.debug(msg)
             response = getattr(requests, self.method)(url=self.url,
                 data=self.post_data, auth=self.auth, headers=self.headers)
-        except requests.exceptions.RequestException, e:
+        except requests.exceptions.RequestException as e:
             raise PingdomError(e)
         return PingdomResponse(response)
 
@@ -156,7 +156,7 @@ class PingdomConnection(object):
 
         try:
             resp = PingdomRequest(self, 'checks', post_data=post_data).fetch()
-        except PingdomError, e:
+        except PingdomError as e:
             logging.error(e)
         else:
             return PingdomCheck(resp.content['check'])
@@ -171,7 +171,7 @@ class PingdomConnection(object):
             rs = 'checks/%s' % check_id
             response = PingdomRequest(self, rs, post_data=post_data,
                 method='PUT').fetch()
-        except PingdomError, e:
+        except PingdomError as e:
             logging.error(e)
         else:
             return response.content['message']

@@ -3,12 +3,12 @@ import sys
 from setuptools import setup
 
 setup(name='pingdom',
-      version="0.2.1",
+      version="0.2.2",
       description='Pingdom Library',
       long_description="""3rd-party Python interface to Pingdom's REST API.""",
       author='Mike Babineau',
       author_email='michael.babineau@gmail.com',
-      install_requires=[ 'requests>=0.10.8' ],
+      install_requires=[ 'requests>=0.10.8', 'setuptools>=57.5.0' ],
       url='https://github.com/mbabineau/pingdom-python',
       packages=['pingdom'],
       license='Apache v2.0',
